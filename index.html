@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+    <html lang="pl">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Lista pracowników</title>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+            <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
+            <link rel="stylesheet" href="style.css">
+        </head>
+        <body>
+            <header>
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                    <div class="container">
+                        <a class="navbar-brand" href="#"><h2>Lista pracowników</h2></a>
+                    </div>
+                </nav>
+            </header>
+
+            <main>
+                <section id="dodaj-pracownika" class="py-3">
+                    <div class="container">
+                        <h2>Dodaj pracownika</h2>
+                        <form id="pracownik-form">
+                            <label for="imie">Imię:</label>
+                            <input type="text" id="imie" required>
+
+                            <label for="nazwisko">Nazwisko:</label>
+                            <input type="text" id="nazwisko" required>
+
+                            <label for="stanowisko">Stanowisko:</label>
+                            <input type="text" id="stanowisko" required>
+
+                            <label for="filia">Lokalizacja filii firmy:</label>
+                            <input type="text" id="filia" required>
+
+                            <label for="data-rozpoczecia">Data rozpoczęcia pracy:</label>
+                            <input type="date" id="data-rozpoczecia" required>
+
+                            <label for="zarobki">Zarobki:</label>
+                            <input type="number" id="zarobki" required>
+
+                            <button type="submit">Dodaj</button>
+                        </form>
+                    </div>
+                </section>
+
+                <section id="lista-pracownikow" class="py-5">
+                    <div class="container">
+                        <h2>Lista pracowników</h2>
+                        <table id="tabela-pracownikow" class="table table-striped">
+                            <thead>
+                                <tr>
+                                <th>ID</th>
+                                <th>Imię</th>
+                                <th>Nazwisko</th>
+                                <th>Stanowisko</th>
+                                <th>Lokalizacja</th>
+                                <th>Data rozpoczęcia</th>
+                                <th>Zarobki</th>
+                                <th>Akcje</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </section>
+            </main>
+
+            <footer class="bg-light py-3">
+                <div class="container">
+                    <p>Marek Skolik</p>
+                </div>
+            </footer>
+
+            <div class="modal fade" id="modal-edycja" tabindex="-1" aria-labelledby="modal-edycja-label" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modal-edycja-label">Edytuj pracownika</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="edycja-form">
+                                <input type="hidden" id="pracownik-id">
+                                
+                                <label for="edycja-imie">Imię:</label>
+                                <input type="text" id="edycja-imie" required>
+
+                                <label for="edycja-nazwisko">Nazwisko:</label>
+                                <input type="text" id="edycja-nazwisko" required>
+
+                                <label for="edycja-stanowisko">Stanowisko:</label>
+                                <input type="text" id="edycja-stanowisko" required>
+
+                                <label for="edycja-filia">Lokalizacja filii firmy:</label>
+                                <input type="text" id="edycja-filia" required>
+
+                                <label for="edycja-data-rozpoczecia">Data rozpoczęcia pracy:</label>
+                                <input type="date" id="edycja-data-rozpoczecia" required>
+
+                                <label for="edycja-zarobki">Zarobki:</label>
+                                <input type="number" id="edycja-zarobki" required>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuluj</button>
+                            <button type="button" class="btn btn-primary" id="zapisz-edycje">Zapisz</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+            <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
+            <script src="script.js"></script>
+            <script src="bootstrap.min.js"></script>
+        </body>
+    </html>
