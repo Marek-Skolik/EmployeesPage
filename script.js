@@ -100,4 +100,71 @@ $(document).ready(function() {
         var row = $(this).closest('tr');
         table.row(row).remove().draw();
       });
+
+      var storedData = localStorage.getItem('employeeData');
+  if (storedData) {
+    var parsedData = JSON.parse(storedData);
+    renderTable(parsedData);
+  }
+
+  function addEmployeeToTable(data) {
+    var table = $('#employee-table').DataTable();
+    table.row.add([
+      '',
+      data.firstName,
+      data.lastName,
+      data.position,
+      data.branchLocation,
+      data.startDate,
+      data.salary,
+      '<button class="edit-btn">Edytuj</button><button class="delete-btn">Usuń</button>'
+    ]).draw();
+
+    var currentData = table
+      .rows()
+      .data()
+      .toArray();
+
+    localStorage.setItem('employeeData', JSON.stringify(currentData));
+  }
+
+  $('#employee-form').submit(function(event) {
+    event.preventDefault();
+
+    var firstName = $('#first-name').val();
+    var lastName = $('#last-name').val();
+    var position = $('#position').val();
+    var branchLocation = $('#branch-location').val();
+    var startDate = $('#start-date').val();
+    var salary = $('#salary').val();
+
+    addEmployeeToTable({
+      firstName: firstName,
+      lastName: lastName,
+      position: position,
+      branchLocation: branchLocation,
+      startDate: startDate,
+      salary: salary
     });
+
+    $('#employee-form')[0].reset();
+  });
+
+  function renderTable(data) {
+    var table = $('#employee-table').DataTable();
+    table.clear().rows.add(data).draw();
+  }
+
+  $('#employee-table').on('click', '.delete-btn', function() {
+    var table = $('#employee-table').DataTable();
+    var row = $(this).closest('tr');
+    table.row(row).remove().draw();
+
+    var currentData = table
+      .rows()
+      .data()
+      .toArray();
+
+    localStorage.setItem('employeeData', JSON.stringify(currentData));
+  });
+});
