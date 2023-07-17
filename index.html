@@ -1,142 +1,144 @@
 <!DOCTYPE html>
-    <html lang="pl">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Lista pracowników</title>
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
-            <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
-            <link rel="stylesheet" href="style.css">
-        </head>
-        <body>
-            <header>
-                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                    <div class="container" style="text-align: center;">
-                        <a class="navbar-brand" href="#"><h2>Lista pracowników</h2></a>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista pracowników</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.datatables.net/plug-ins/1.11.3/i18n/Polish.json"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container" style="text-align: center;">
+                <a class="navbar-brand" href="#"><h2>Lista pracowników</h2></a>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section id="add-employee" class="py-3">
+            <div class="container">
+                <h2 class="mb-4">Dodaj pracownika</h2>
+                <form id="employee-form">
+                    <div class="mb-3">
+                        <label for="first-name">Imię:</label>
+                        <input type="text" id="first-name" class="form-control" required>
                     </div>
-                </nav>
-            </header>
-            <main>
-                <section id="add-employee" class="py-3">
-                    <div class="container">
-                        <h2 class="mb-4">Dodaj pracownika</h2>
-                        <form id="employee-form">
-                            <div class="mb-3">
-                                <label for="first-name">Imię:</label>
-                                <input type="text" id="first-name" class="form-control" required>
-                            </div>
 
-                            <div class="mb-3">
-                                <label for="last-name">Nazwisko:</label>
-                                <input type="text" id="last-name" class="form-control" required>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="position">Stanowisko:</label>
-                                <input type="text" id="position" class="form-control" required>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="branch-location">Lokalizacja filii firmy:</label>
-                                <input type="text" id="branch-location" class="form-control" required>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="start-date">Data rozpoczęcia pracy:</label>
-                                <input type="date" id="start-date" class="form-control" required>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="salary">Zarobki:</label>
-                                <input type="number" id="salary" class="form-control" required>
-                            </div>
-
-                            <button type="submit" class="btn btn-primary">Dodaj</button>
-                        </form>
+                    <div class="mb-3">
+                        <label for="last-name">Nazwisko:</label>
+                        <input type="text" id="last-name" class="form-control" required>
                     </div>
-                </section>
 
-                <section id="employee-list" class="py-3">
-                    <div class="container">
-                        <h2 class="mb-4">Lista pracowników</h2>
-                        <div class="table-responsive">
-                            <table id="employee-table" class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Imię</th>
-                                        <th>Nazwisko</th>
-                                        <th>Stanowisko</th>
-                                        <th>Lokalizacja</th>
-                                        <th>Data rozpoczęcia</th>
-                                        <th>Zarobki</th>
-                                        <th>Akcje</th>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
-                        </div>
-                        <button id="export-csv" class="btn btn-primary my-3">Eksport CSV</button>
+                    <div class="mb-3">
+                        <label for="position">Stanowisko:</label>
+                        <input type="text" id="position" class="form-control" required>
                     </div>
-                </section>
-            </main>
-            <footer class="bg-light py-3">
-                <div class="container" style="text-align: center;">
-                    <p>Marek Skolik</p>
+
+                    <div class="mb-3">
+                        <label for="branch-location">Lokalizacja filii firmy:</label>
+                        <input type="text" id="branch-location" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="start-date">Data rozpoczęcia pracy:</label>
+                        <input type="date" id="start-date" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="salary">Zarobki:</label>
+                        <input type="number" id="salary" class="form-control" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Dodaj</button>
+                </form>
+            </div>
+        </section>
+
+        <section id="employee-list" class="py-3">
+            <div class="container">
+                <h2 class="mb-4">Lista pracowników</h2>
+                <div class="table-responsive">
+                    <table id="employee-table" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th data-searchable="true">ID</th>
+                                <th data-searchable="true">Imię</th>
+                                <th data-searchable="true">Nazwisko</th>
+                                <th>Stanowisko</th>
+                                <th>Lokalizacja</th>
+                                <th>Data rozpoczęcia</th>
+                                <th>Zarobki</th>
+                                <th>Akcje</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
                 </div>
-            </footer>
-            <div class="modal fade" id="edit-modal" tabindex="-1" aria-labelledby="edit-modal-label" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="edit-modal-label">Edytuj pracownika</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button id="export-csv" class="btn btn-primary my-3">Eksport CSV</button>
+            </div>
+        </section>
+    </main>
+    <footer class="bg-light py-3">
+        <div class="container" style="text-align: center;">
+            <p>Marek Skolik</p>
+        </div>
+    </footer>
+    <div class="modal fade" id="edit-modal" tabindex="-1" aria-labelledby="edit-modal-label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="edit-modal-label">Edytuj pracownika</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="edit-form">
+                        <input type="hidden" id="employee-id">
+
+                        <div class="mb-3">
+                            <label for="edit-first-name">Imię:</label>
+                            <input type="text" id="edit-first-name" class="form-control" required>
                         </div>
-                        <div class="modal-body">
-                            <form id="edit-form">
-                                <input type="hidden" id="employee-id">
 
-                                <div class="mb-3">
-                                    <label for="edit-first-name">Imię:</label>
-                                    <input type="text" id="edit-first-name" class="form-control" required>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="edit-last-name">Nazwisko:</label>
-                                    <input type="text" id="edit-last-name" class="form-control" required>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="edit-position">Stanowisko:</label>
-                                    <input type="text" id="edit-position" class="form-control" required>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="edit-branch-location">Lokalizacja filii firmy:</label>
-                                    <input type="text" id="edit-branch-location" class="form-control" required>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="edit-start-date">Data rozpoczęcia pracy:</label>
-                                    <input type="date" id="edit-start-date" class="form-control" required>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="edit-salary">Zarobki:</label>
-                                    <input type="number" id="edit-salary" class="form-control" required>
-                                </div>
-                            </form>
+                        <div class="mb-3">
+                            <label for="edit-last-name">Nazwisko:</label>
+                            <input type="text" id="edit-last-name" class="form-control" required>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuluj</button>
-                            <button type="button" class="btn btn-primary" id="save-edits">Zapisz</button>
+
+                        <div class="mb-3">
+                            <label for="edit-position">Stanowisko:</label>
+                            <input type="text" id="edit-position" class="form-control" required>
                         </div>
-                    </div>
+
+                        <div class="mb-3">
+                            <label for="edit-branch-location">Lokalizacja filii firmy:</label>
+                            <input type="text" id="edit-branch-location" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="edit-start-date">Data rozpoczęcia pracy:</label>
+                            <input type="date" id="edit-start-date" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="edit-salary">Zarobki:</label>
+                            <input type="number" id="edit-salary" class="form-control" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuluj</button>
+                    <button type="button" class="btn btn-primary" id="save-edits">Zapisz</button>
                 </div>
             </div>
-            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-            <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-            <script src="script.js"></script>
-            <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-        </body>
-    </html>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
